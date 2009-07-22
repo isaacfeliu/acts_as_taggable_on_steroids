@@ -2,6 +2,7 @@ class ActsAsTaggableMigration < ActiveRecord::Migration
   def self.up
     create_table :tags do |t|
       t.column :name, :string
+      t.column :slug, :string
     end
     
     create_table :taggings do |t|
@@ -15,6 +16,7 @@ class ActsAsTaggableMigration < ActiveRecord::Migration
       t.column :created_at, :datetime
     end
     
+    add_index :tags, :slug
     add_index :taggings, :tag_id
     add_index :taggings, [:taggable_id, :taggable_type]
   end
